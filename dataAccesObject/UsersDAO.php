@@ -2,8 +2,6 @@
 class UsersDAO {
 
     public static function create($signupPost){
-        global $entityManager;
-        
         $user = new Users;
         $user->setLogin($signupPost['login']);
         $user->setMail($signupPost['email']);
@@ -17,13 +15,12 @@ class UsersDAO {
         $user->setNews(($signupPost['News'])?1:0);
         $user->setAdmin(0);
         
-        $entityManager->persist($user);
-        $entityManager->flush();
+        Bootstrap::$entityManager->persist($user);
+        Bootstrap::$entityManager->flush();
     }
     
     public static function login($loginPost){
-        global $entityManager;
-        $user = $entityManager->getRepository('Users')->findOneByLogin($loginPost['login']);
+        $user = Bootstrap::$entityManager->getRepository('Users')->findOneByLogin($loginPost['login']);
         if(isset($user)){
             if($loginPost['mdp'] === $user->getPassword()){
                 $_SESSION['id'] = $user->getId();

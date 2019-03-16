@@ -10,7 +10,7 @@ class Cart{
     }
     
     function getTotal(){
-        return $this->total;
+        return 0;
     }
     
     function plus($idItem){

@@ -1,8 +1,8 @@
 <?php
-    function logout_controller ($request, $response, $args) { 
-        global $twig;  
-        unset($_SESSION['id']);
-        $params = defaultParams('logout'); 
-        return $response->withStatus(302)->withHeader('Location', '/');
+    class LogoutCtrl{
+        static function GET ($request, $response, $args) { 
+            unset($_SESSION['id']);
+            return $response->withStatus(302)->withHeader('Location', '/');
+        }
     }
 ?>

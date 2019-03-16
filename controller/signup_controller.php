@@ -1,8 +1,9 @@
 <?php
-    function signUp_controller ($request, $response, $args) { 
-        global $twig; 
-        $params = defaultParams('signup');
-        $template = $twig ->loadTemplate ('signup.twig');    
-        return $response->write( $template ->render ($params)); 
+    class SignupCtrl{
+        static function GET ($request, $response, $args) {
+            $params = Controller::defaultParams('signup');
+            $template = Controller::$twig -> loadTemplate ('signup.twig');    
+            return $response->write( $template ->render ($params)); 
+        }
     }
 ?>
