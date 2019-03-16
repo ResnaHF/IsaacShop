@@ -30,6 +30,9 @@
             $app->get('/item/remove/{id}', 'ItemCtrl::remove');
             
             $app->get('/cart/', 'CartCtrl::GET');
+            $app->get('/cart/plus/{id}', 'CartCtrl::plus');
+            $app->get('/cart/minus/{id}', 'CartCtrl::minus');
+            $app->get('/cart/remove/{id}', 'CartCtrl::remove');
             $app->run();    
         }
     

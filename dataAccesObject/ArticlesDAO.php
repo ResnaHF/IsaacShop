@@ -10,5 +10,9 @@ class ArticlesDAO {
     public static function getItem($idItem){
         return Bootstrap::$entityManager->getRepository('Articles')->findOneById($idItem);
     }
+    
+    public static function getItemList($idItemList){
+        return Bootstrap::$entityManager->getRepository('Articles')->findById($idItemList);
+    }
 }
 ?>

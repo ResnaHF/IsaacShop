@@ -35,7 +35,7 @@
                 if(isset($_SESSION['cart'])){
                     $cart = $_SESSION['cart'];
                     $cart->minus($args['id']);
-                    if($cart->getTotal() == 0){
+                    if($cart->getNumber() == 0){
                         unset($_SESSION['cart']);
                     }else{
                         $_SESSION['cart'] = $cart;
@@ -53,7 +53,7 @@
                 if(isset($_SESSION['cart'])){
                     $cart = $_SESSION['cart'];
                     $cart->remove($args['id']);
-                    if($cart->getTotal() == 0){
+                    if($cart->getNumber() == 0){
                         unset($_SESSION['cart']);
                     }else{
                         $_SESSION['cart'] = $cart;
