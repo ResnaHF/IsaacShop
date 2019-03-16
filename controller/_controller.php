@@ -31,13 +31,12 @@
             $result['item'] = false;
         }
         
-        if(isset($_SESSION['nbCart'])){
-            $result['value'] = 'nbCart : '.$_SESSION['nbCart'];
-            $result['cart'] = true;
-            $result['nbCart'] = $_SESSION['nbCart'];
+        if(isset($_SESSION['cart'])){
+            $result['isCart'] = true;
+            $result['cart'] = $_SESSION['cart'];
+            print_r($result['cart']);
         }else{
-            $result['value'] = 'noCart';
-            $result['cart'] = false;
+            $result['isCart'] = false;
         }
         
         return $result;
@@ -67,6 +66,9 @@
     $app->get('/logout/', logout_controller);
     
     $app->get('/item/{id}', item_controller);
+    $app->get('/item/plus/{id}', item_plus_controller);
+    $app->get('/item/minus/{id}', item_minus_controller);
+    $app->get('/item/remove/{id}', item_remove_controller);
     
     $app->get('/cart/', cart_controller);
     $app->run();    

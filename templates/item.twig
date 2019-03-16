@@ -3,10 +3,13 @@
 {% block content %}
        <div class="row">
            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 green">
+           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                    
                 <h2>{{item.getName}}</h2>
                 <img src={{item.getImg}} class="img-responsive center-block" height="48" width="48">
+                <a href="/item/plus/{{item.getId}}">plus</a>
+                <a href="/item/minus/{{item.getId}}">minus</a>
+                <a href="/item/remove/{{item.getId}}">remove</a>
            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
         </div>
 {% endblock %}

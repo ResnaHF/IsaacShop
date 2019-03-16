@@ -22,7 +22,7 @@
 		</ul>
         <ul class="nav navbar-nav navbar-right">
 			{% if cart %}	
-				<li {% if page == 'cart' %}class="active"{% endif %}><a href="/cart/">Panier</a></li>
+				<li {% if page == 'isCart' %}class="active"{% endif %}><a href="/cart/">Panier <span class="badge">{{cart.getTotal}}</span></a></li>
 			{% endif %}
         	{% if admin %}
 				<li {% if page == 'admin' %}class="active"{% endif %}><a href="/admin/">Administration</a></li>
