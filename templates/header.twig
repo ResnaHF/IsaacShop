@@ -1,0 +1,39 @@
+<nav role="navigation" class="navbar navbar-default">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/" class="navbar-brand {% if page == 'welcome' %}active{% endif %}" >Isaac Shop</a>
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse">
+		<ul class="nav navbar-nav ">
+			{% if connected %}	
+				<li {% if page == 'profil' %}class="active"{% endif %}><a href="/profil/">Profil</a></li>
+			{% endif %}
+			<li {% if page == 'search' %}class="active"{% endif %}><a href="/search/">Recherche</a></li>
+			{% if item %}
+				<li {% if page == 'item' %}class="active"{% endif %}><a href="/item/{{idItem}}">Article</a></li>
+			{% endif %}
+		</ul>
+        <ul class="nav navbar-nav navbar-right">
+			{% if cart %}	
+				<li {% if page == 'cart' %}class="active"{% endif %}><a href="/cart/">Panier</a></li>
+			{% endif %}
+        	{% if admin %}
+				<li {% if page == 'admin' %}class="active"{% endif %}><a href="/admin/">Administration</a></li>
+			{% endif %}
+			{% if connected %}	
+				<li {% if page == 'logout' %}class="active"{% endif %}><a href="/logout/">Déconnexion</a></li>
+			{% else %}	
+				<li {% if page == 'signup' %}class="active"{% endif %}><a href="/signup/">S'enregistrer</a></li>
+				<li {% if page == 'login' %}class="active"{% endif %}><a href="/login/">Connexion</a></li>
+			{% endif %}
+		
+		</ul>
+	</div>
+</nav>

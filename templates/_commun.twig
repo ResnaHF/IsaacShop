@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Isaac Shop</title>
+        <link rel="icon" type="image/png" href="/ressources/logo.png" sizes="32x32">
+        <link rel="stylesheet" href="/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    	<link rel="stylesheet" href="/ressources/style.css" type="text/css" />
+    </head> 
+    <body> 
+        {{value}}
+        {% include 'header.twig' %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div> 
+        
+        <script src="/vendor/components/jquery/jquery.min.js"></script>
+        <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>

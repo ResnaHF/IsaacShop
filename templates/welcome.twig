@@ -1,0 +1,29 @@
+{% extends "_commun.twig" %} 
+
+{% block content %}
+    <h4>Liste d'articles aléatoires</h4> 
+       <div class="row">
+           <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+               <div class="container" >
+                {% for item in randomList %}
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <div class="thumbnail">
+                            <a href="/item/{{item.getId}}"> 
+                                <img src="{{item.getImg}}" class="img-responsive center-block"  height="48" width="48"/>
+                                <p>{{ item.getDescription }}</p>
+                                <div class="caption">
+                                    <p>
+                                        <span class="pull-left"><b>{{ item.getName }}</b></span>
+                                        <span class="pull-right">{{ item.getPrice }} <img src="ressources/coin.png"/></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+           <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+        </div>
+{% endblock %}
