@@ -7,9 +7,9 @@
                    
                 <h2>{{item.getName}}</h2>
                 <img src={{item.getImg}} class="img-responsive center-block" height="48" width="48">
-                <a href="/item/plus/{{item.getId}}">plus</a>
-                <a href="/item/minus/{{item.getId}}">minus</a>
-                <a href="/item/remove/{{item.getId}}">remove</a>
+                <a href="/item/plus/{{item.getId}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></a>
+                <a href="/item/minus/{{item.getId}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></a>
+                <a href="/item/remove/{{item.getId}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a>
            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
         </div>
 {% endblock %}

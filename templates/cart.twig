@@ -7,9 +7,9 @@
                 {% set item = cart.getItem(id) %}
                 <li>
                      {{cart.getNumberItem(id)}} X <a href="/item/{{id}}">{{item.getName}}</a> : {{cart.getAmountItem(id)}} <img src="/ressources/coin.png"/>
-                    <a href="/cart/plus/{{item.getId}}">plus</a>
-                    <a href="/cart/minus/{{item.getId}}">minus</a>
-                    <a href="/cart/remove/{{item.getId}}">remove</a>
+                    <a href="/cart/plus/{{item.getId}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></a>
+                    <a href="/cart/minus/{{item.getId}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></a>
+                    <a href="/cart/remove/{{item.getId}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a>
                 </li>
             {% endfor %}
         </ul>

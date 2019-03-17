@@ -1,19 +1,26 @@
 .errorMsg {
-    color : red;
+    border-color: red;
 }
 
 h1 {
     color : red;
 }
 
-h2 {
-    text-align : center;
+.red{
+    color : red;
 }
-
-h4 {
-    text-align : center;
-}
-
 .center {
     text-align : center;
+}
+
+.taille{
+    height: 200px;
+}
+/*
+*{
+   font-family:"Comic Sans MS",  Comic Sans, cursive;
+}
+*/
+.input-group{
+    margin-bottom: 5px;
 }

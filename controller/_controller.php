@@ -13,11 +13,15 @@
             Controller::$twig = new Twig_Environment($loader, array( 'cache' => false ));
                 
             $app->get('/', 'WelcomeCtrl::GET');
-            $app->get('/signup/', 'SignupCtrl::GET');
+            
             $app->get('/profil/', 'ProfilCtrl::GET');
-            $app->post('/validate/', 'PrivateCtrl::POST');
+            
             $app->get('/admin/', 'AdminCtrl::GET');
+            
             $app->get('/search/', 'SearchCtrl::GET');
+            
+            $app->get('/signup/', 'SignupCtrl::GET');
+            $app->post('/signup/', 'SignupCtrl::POST');
             
             $app->get('/login/', 'LoginCtrl::GET');
             $app->post('/login/', 'LoginCtrl::POST');
@@ -40,21 +44,21 @@
             $result = array();
             $result['page'] = $pageName;
             
-            if (isset($_SESSION['id'])){
-                $result['connected'] = true;
-                $result['idUsers'] = $_SESSION['id'];
-                $result['admin'] = false;
+            if (isset($_SESSION['idUsers'])){
+                $result['isConnected'] = true;
+                $result['idUsers'] = $_SESSION['idUsers'];
+                $result['isAdmin'] = UsersDAO::isAdmin($_SESSION['idUsers']);
                 
             }else{
-                $result['connected'] = false;
+                $result['isConnected'] = false;
                 $result['admin'] = false;
             }
             
             if(isset($_SESSION['idItem'])){
-                $result['item'] = true;
+                $result['isItem'] = true;
                 $result['idItem'] = $_SESSION['idItem'];
             }else{
-                $result['item'] = false;
+                $result['isItem'] = false;
             }
             
             if(isset($_SESSION['cart'])){
@@ -62,6 +66,14 @@
                 $result['cart'] = $_SESSION['cart'];
             }else{
                 $result['isCart'] = false;
+            }
+            
+            if(isset($_SESSION['infos'])){
+                $result['isInfo'] = true;
+                $result['infos'] = $_SESSION['infos'];
+                unset($_SESSION['infos']);
+            }else{
+                $result['isInfo'] = false;
             }
             
             return $result;

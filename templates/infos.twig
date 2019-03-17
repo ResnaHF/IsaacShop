@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-xs-2 col-sm-4 col-md-5 col-lg-5"></div>
+    <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2">
+        <ul>
+            {% for info in infos %}
+                <p>
+                        {% if info['type'] == 'SUCCES' %}
+                            <span class="label label-success">Succès</span>
+                        {% elseif info['type'] == 'INFO' %}
+                            <span class="label label-info">Info</span>
+                        {% elseif info['type'] == 'ERROR' %}
+                            <span class="label label-danger">Erreur</span>
+                        {% endif %}
+                    <span> {{info['message']}}</span>
+                </p>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-xs-2 col-sm-4 col-md-5 col-lg-5"></div>
+</div>

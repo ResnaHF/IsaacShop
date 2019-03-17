@@ -9,7 +9,10 @@
     </head> 
     <body> 
         {% include 'header.twig' %}
-        <div id="content">
+        {% if isInfo %}
+            {% include 'infos.twig' %}
+        {% endif %}
+        <div id="content" class="row">
             {% block content %}{% endblock %}
         </div> 
         

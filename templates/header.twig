@@ -12,22 +12,22 @@
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav ">
-			{% if connected %}	
+			{% if isConnected %}	
 				<li {% if page == 'profil' %}class="active"{% endif %}><a href="/profil/">Profil</a></li>
 			{% endif %}
 			<li {% if page == 'search' %}class="active"{% endif %}><a href="/search/">Recherche</a></li>
-			{% if item %}
+			{% if isItem %}
 				<li {% if page == 'item' %}class="active"{% endif %}><a href="/item/{{idItem}}">Article</a></li>
 			{% endif %}
 		</ul>
         <ul class="nav navbar-nav navbar-right">
-			{% if cart %}	
+			{% if isCart %}	
 				<li {% if page == 'isCart' %}class="active"{% endif %}><a href="/cart/">Panier <span class="badge">{{cart.getNumber}}</span></a></li>
 			{% endif %}
-        	{% if admin %}
+        	{% if isAdmin %}
 				<li {% if page == 'admin' %}class="active"{% endif %}><a href="/admin/">Administration</a></li>
 			{% endif %}
-			{% if connected %}	
+			{% if isConnected %}	
 				<li {% if page == 'logout' %}class="active"{% endif %}><a href="/logout/">Déconnexion</a></li>
 			{% else %}	
 				<li {% if page == 'signup' %}class="active"{% endif %}><a href="/signup/">S'enregistrer</a></li>
