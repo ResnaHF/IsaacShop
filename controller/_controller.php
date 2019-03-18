@@ -14,7 +14,9 @@
                 
             $app->get('/', 'WelcomeCtrl::GET');
             
-            $app->get('/profil/', 'ProfilCtrl::GET');
+            $app->get('/profil/donnee/', 'ProfilCtrl::Donnee_GET');
+            $app->post('/profil/donnee/', 'ProfilCtrl::Donnee_POST');
+            $app->get('/profil/historique/', 'ProfilCtrl::Historique_GET');
             
             $app->get('/admin/', 'AdminCtrl::GET');
             
@@ -71,6 +73,13 @@
             if(isset($_SESSION['infos'])){
                 $result['isInfo'] = true;
                 $result['infos'] = $_SESSION['infos'];
+                foreach($result['infos'] as $info){
+                    if(isset($info['idt'])){
+                        foreach($info['idt'] as $idt){
+                            $result[$idt] = true;
+                        }
+                    }
+                }
                 unset($_SESSION['infos']);
             }else{
                 $result['isInfo'] = false;

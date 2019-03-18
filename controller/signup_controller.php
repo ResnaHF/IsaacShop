@@ -2,6 +2,7 @@
     class SignupCtrl{
         static function GET ($request, $response, $args) {
             $params = Controller::defaultParams('signup');
+            $params['news'] = true;
             $template = Controller::$twig -> loadTemplate ('signup.twig');    
             return $response->write( $template ->render ($params)); 
         }
@@ -23,10 +24,11 @@
                 $params['password2'] = $_POST['password2'];
                 $params['lastname'] = $_POST['lastname'];
                 $params['firstname'] = $_POST['firstname'];
-                $params['adresse'] = $_POST['adresse'];
+                $params['adress'] = $_POST['adress'];
                 $params['postalCode'] = $_POST['postalCode'];
                 $params['city'] = $_POST['city'];
                 $params['phone'] = $_POST['phone'];
+                $params['news'] = $_POST['news'];
                 
                 $template = Controller::$twig -> loadTemplate ('signup.twig');    
                 return $response->write( $template ->render ($params)); 

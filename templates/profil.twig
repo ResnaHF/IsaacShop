@@ -1,5 +1,20 @@
 {% extends "_commun.twig" %} 
 
 {% block content %}
-        <h1>PROFIL</h1> 
+    <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+        <h1 class="center">Profil</h1> 
+        <div class="row">
+            <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
+                <div class="list-group">
+        			<a href="/profil/donnee/" class="list-group-item {% if subpage == 'donnee' %} active {% endif %}">Données personnelles</a>
+        			<a href="/profil/historique/" class="list-group-item {% if subpage == 'historique' %} active {% endif %}">Historique des commandes</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-9 col-lg-9">
+                {% block specifique %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
 {% endblock %}

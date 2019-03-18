@@ -1,5 +1,9 @@
 .errorMsg {
-    border-color: red;
+    border-color: #d9534f;
+}
+
+.succesMsg {
+    border-color: #5cb85c;
 }
 
 h1 {
@@ -23,4 +27,9 @@ h1 {
 */
 .input-group{
     margin-bottom: 5px;
+}
+
+.nomargin {
+    margin-right: 0px;
+    margin-left: 0px;
 }

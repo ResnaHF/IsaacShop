@@ -10,7 +10,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="input-group">
                         <span class="input-group-addon">Identifiant<span class="red">*</span></span>
-                        <input type="text" class="form-control" name="login" value="{{login}}" maxlength=16 pattern="[a-zA-Z][a-zA-Z0-9]{4-15}" title="Un identifiant doit faire minimum 5 caractères, il commence par une lettre et contient uniquement des lettres et de chiffres" required/>
+                        <input type="text" class="form-control {% if ErrLogin %}errorMsg{% endif %}" name="login" value="{{login}}" maxlength=16 pattern="[a-zA-Z][a-zA-Z0-9]{4-15}" title="Un identifiant doit faire minimum 5 caractères, il commence par une lettre et contient uniquement des lettres et de chiffres" required/>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6"></div>
@@ -18,21 +18,21 @@
             
             <div class="input-group">
                 <span class="input-group-addon">@<span class="red">*</span></span>
-                <input type="email" class="form-control" name="mail" value="{{mail}}" maxlength=100 required/>
+                <input type="email" class="form-control {% if ErrMail %}errorMsg{% endif %}" name="mail" value="{{mail}}" maxlength=100 required/>
             </div>
             
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="input-group">
                         <span class="input-group-addon">Mot de passe<span class="red">*</span></span>
-                        <input type="password" class="form-control" name="password1" value="{{password1}}" id="password1" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial" required/>
+                        <input type="password" class="form-control {% if ErrPwd1 %}errorMsg{% endif %}" name="password1" value="{{password1}}" id="password1" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial" required/>
                     </div>
                 </div>
                 
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="input-group">
                         <span class="input-group-addon">Confirmation<span class="red">*</span></span>
-                        <input type="password" class="form-control" name="password2" value="{{password2}}" id="password2" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial" required/>
+                        <input type="password" class="form-control {% if ErrPwd2 %}errorMsg{% endif %}" name="password2" value="{{password2}}" id="password2" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial" required/>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             
             <div class="input-group">
                 <span class="input-group-addon">Adresse</span>
-                <input type="text" class="form-control" name="adresse" value="{{adresse}}" maxlength=100 />
+                <input type="text" class="form-control" name="adress" value="{{adress}}" maxlength=100 />
             </div>
             
             <div class="row">
@@ -76,16 +76,22 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="input-group">
-                <span class="input-group-addon">Téléphone</span>
-                <input type="tel" class="form-control" name="phone" value="{{phone}}" maxlength=10 pattern="0[0-9]{9}" title="Un code postal est composé de 10 chiffres et commence par un 0" />
+        
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">Téléphone</span>
+                        <input type="tel" class="form-control" name="phone" value="{{phone}}" maxlength=10 pattern="0[0-9]{9}" title="Un code postal est composé de 10 chiffres et commence par un 0" />
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6"></div>
             </div>
             
             <hr>
             
             <div class="input-group">
-                <span class="input-group-addon"><input type="checkbox" name="news" checked/></span>
+                <span class="input-group-addon"><input type="checkbox" name="news" {% if news %}checked{% endif %}/></span>
                 <span class="form-control">Je souhaite recevoir les newsletters du site</span>
             </div>
             
@@ -101,6 +107,4 @@
         </form>
     </div>
     <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
-    
-    <script type="text/javascript" src="ressources/script.js"></script>
 {% endblock %}

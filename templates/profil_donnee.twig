@@ -1,0 +1,103 @@
+{% extends "profil.twig" %} 
+{% set subpage = 'donnee' %}
+
+{% block specifique %}
+    <h4 class="center">Modification des données du compte</h4>   
+    <form class="form-row"  method="post" action="/profil/donnee/" >
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Identifiant</span>
+                    <span class="form-control">{{login}}</span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6"></div>
+        </div>
+        
+        <div class="input-group">
+            <span class="input-group-addon">@</span>
+                    <span class="form-control">{{mail}}</span>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Mot de passe</span>
+                    <input type="password" class="form-control {% if ErrPwd1 %}errorMsg{% endif %}{% if SucPwd1 %}succesMsg{% endif %}" name="password1" value="{{password1}}" id="password1" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial"/>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Confirmation</span>
+                    <input type="password" class="form-control {% if ErrPwd1 %}errorMsg{% endif %}" name="password2" value="{{password2}}" id="password2" maxlength=16 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}" title="Un mot de passe doit faire minimum 6 caractères, il doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial"/>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        <h3>Adresse</h4>
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Nom</span>
+                    <input type="text" class="form-control {% if SucLname %}succesMsg{% endif %}" name="lastname" value="{{lastname}}" maxlength=50 pattern="[a-zA-Z]*" title="Un nom est uniquement composé de lettres" />
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">            
+                    <span class="input-group-addon">Prénom</span>
+                    <input type="text" class="form-control {% if SucFname %}succesMsg{% endif %}" name="firstname" value="{{firstname}}" maxlength=50 pattern="[a-zA-Z]*" title="Un nom est uniquement composé de lettres" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <span class="input-group-addon">Adresse</span>
+            <input type="text" class="form-control {% if SucAdr %}succesMsg{% endif %}" name="adress" value="{{adress}}" maxlength=100 />
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Code postal</span>
+                    <input type="text" class="form-control {% if SucPostC %}succesMsg{% endif %}" name="postalCode" value="{{postalCode}}" maxlength=5 pattern="[0-9]{5}" title="Un code postal est composé de 5 chiffres" />
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">  
+                    <span class="input-group-addon">Ville</span>
+                    <input type="text" class="form-control {% if SucCity %}succesMsg{% endif %}" name="city" value="{{city}}" maxlength=50 pattern="[a-zA-Z\- 0-9]*" title="Un nom de vide est composé de lettres, d'espace, de tiret et pour les cedex de chiffres"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Téléphone</span>
+                    <input type="tel" class="form-control {% if SucPho %}succesMsg{% endif %}" name="phone" value="{{phone}}" maxlength=10 pattern="0[0-9]{9}" title="Un code postal est composé de 10 chiffres et commence par un 0" />
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 col-sm-6"></div>
+        </div>
+        
+        <hr>
+        
+        <div class="input-group">
+            <span class="input-group-addon"><input type="checkbox" name="news" {% if news %}checked{% endif %}/></span>
+            <span class="form-control {% if SucNews %}succesMsg{% endif %}">Je souhaite recevoir les newsletters du site</span>
+        </div>
+        
+        <hr>
+    	<div class="center">
+    	    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    	</div>
+    </form>
+    </div>
+{% endblock %}

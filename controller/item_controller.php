@@ -2,9 +2,9 @@
     class ItemCtrl{
         static function GET ($request, $response, $args) { 
             $item = ArticlesDAO::getItem($args['id']);
-            if(isset($item)){
-                $params = Controller::defaultParams('item'); 
+            if(isset($item)){ 
                 $_SESSION['idItem'] = $args['id'];
+                $params = Controller::defaultParams('item');
                 $params['item'] = $item;
                 $template = Controller::$twig -> loadTemplate ('item.twig');
                 return $response->write( $template ->render ($params)); 
