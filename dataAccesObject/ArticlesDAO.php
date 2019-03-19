@@ -14,5 +14,38 @@ class ArticlesDAO {
     public static function getItemList($idItemList){
         return Bootstrap::$entityManager->getRepository('Articles')->findById($idItemList);
     }
+    
+    public static function search($name, $min, $max, $page, $sizePage){
+        //TIPS : https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/query-builder.html#working-with-querybuilder
+        $qb = Bootstrap::$entityManager->createQueryBuilder();
+        $qb->select('i')
+           ->from('Articles', 'i')
+           ->where('i.name LIKE :name')
+           ->andwhere('i.price >= :min')
+           ->andwhere('i.price <= :max')
+           
+           ->setParameter('name', '%'.$name.'%')
+           ->setParameter('min', $min)
+           ->setParameter('max', $max)
+           ->setFirstResult( ($page-1)*$sizePage )
+           ->setMaxResults( $sizePage );
+           
+        return $qb->getQuery()->getResult();
+    }
+    
+    public static function countItem($name, $min, $max){
+        $qb = Bootstrap::$entityManager->createQueryBuilder();
+        $qb->select('count(i)')
+           ->from('Articles', 'i')
+           ->where('i.name LIKE :name')
+           ->andwhere('i.price >= :min')
+           ->andwhere('i.price <= :max')
+           
+           ->setParameter('name', '%'.$name.'%')
+           ->setParameter('min', $min)
+           ->setParameter('max', $max);
+           
+        return $qb->getQuery()->getResult()[0][1];
+    }
 }
 ?>
