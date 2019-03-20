@@ -1,18 +1,73 @@
 {% extends "_commun.twig" %} 
 
 {% block content %}
-        <h1>CART</h1> 
-        <ul>
-            {% for id in cart.getIdList  %}
-                {% set item = cart.getItem(id) %}
-                <li>
-                     {{cart.getNumberItem(id)}} X <a href="/item/{{id}}">{{item.getName}}</a> : {{cart.getAmountItem(id)}} <img src="/ressources/coin.png"/>
-                    <a href="/cart/plus/{{item.getId}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></a>
-                    <a href="/cart/minus/{{item.getId}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></a>
-                    <a href="/cart/remove/{{item.getId}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
+    <div class="col-xs-10 col-sm-8 col-md-6 col-lg-6">
+        <h1 class="center">Panier</h1>
         
-        <p>Total : {{cart.getAmount}} <img src="/ressources/coin.png"/></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>nom</th>
+                    <th>prix à l'unité</th>
+                    <th>quantité</th>
+                    <th>prix</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id in cart.getIdList  %}
+                    {% set item = cart.getItem(id) %}
+                    <tr>
+                        <td><img src="{{item.getImg}}"/></td>
+                        <td><a href="/item/{{item.getId}}">{{item.getName}}</a></td>
+                        <td>{{item.getPrice|number_format}} <img src="/ressources/coin.png"/></td>
+                        <td>{{cart.getNumberItem(id)}}</td>
+                        <td>{{cart.getAmountItem(id)|number_format}} <img src="/ressources/coin.png"/></td>
+                        <td>
+                            <div class="row text-right">
+                            <div class="btn-group " role="group" >
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{cart.getNumberItem(id)}} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        {% for i in 1..10 %}
+                                            <li><a href="/cart/set/{{item.getId}}?nb={{i}}">{% if i == cart.getNumberItem(id) %}<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> {% endif %} {{i}}</a></li>
+                                        {% endfor %}
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <form class="form-row"  method="get" action="/cart/set/{{item.getId}}" >
+                                                <div class="row">
+                                                    {%if cart.getNumberItem(id) > 10 %}
+                                                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 ">
+                                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                                        <input type="text" class="form-control" name="nb" maxlength=3 pattern="[0-9]*" title="veuillez inserez un nombre positif" {%if cart.getNumberItem(id) > 10 %}value="{{cart.getNumberItem(id)}}"{% endif %} required>
+                                                    </div>
+                                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a type="button" class="btn btn-default" href="/cart/plus/{{item.getId}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
+                                <a type="button" class="btn btn-default" href="/cart/minus/{{item.getId}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"/></a>
+                                <a type="button" class="btn btn-default" href="/cart/remove/{{item.getId}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"/></a>
+                            
+                            </div></div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <p class="text-right">Total : {{cart.getAmount|number_format}} <img src="/ressources/coin.png"/></p>
+    </div>
+    <div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
 {% endblock %}

@@ -82,7 +82,7 @@
                     <tr>
                         <td><img src="{{item.getImg}}"/></td>
                         <td><a href="/item/{{item.getId}}">{{item.getName}}</a></td>
-                        <td>{{item.getPrice}} <img src="/ressources/coin.png"/></td>
+                        <td>{{item.getPrice|number_format}} <img src="/ressources/coin.png"/></td>
                     </tr>
                 {% endfor %}
             </tbody>

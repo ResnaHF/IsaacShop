@@ -29,12 +29,12 @@
             }
             
             $page = 1;
-            if(!empty($get['page'])){
+            if(!empty($get['page']) && (int)$get['page'] > 0){
                $params['page'] = $page = (int)$get['page'];
             }
             
             $sizePage = 20;
-            if(!empty($get['sizePage'])){
+            if(!empty($get['sizePage']) && (int)$get['sizePage'] > 0){
                $sizePage = (int)$get['sizePage'];
             }
             $params['sizePage'] = $sizePage;
@@ -42,7 +42,7 @@
             $params['count'] = $count = ArticlesDAO::countItem($name, $min, $max);
             $nbPages = ceil((int)$count/(int)$sizePage);
             
-            if($pages > $nbPages){
+            if($page > $nbPages){
                 $params['page'] = $page = $nbPages;
             }
             

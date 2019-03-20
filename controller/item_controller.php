@@ -10,6 +10,10 @@
                 $template = Controller::$twig -> loadTemplate ('item.twig');
                 return $response->write( $template ->render ($params)); 
             }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Cet article n\'existe pas'
+                ));
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
@@ -26,6 +30,10 @@
                 $_SESSION['cart'] = $cart;
                 return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
             }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Cet article n\'existe pas'
+                ));
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
@@ -44,6 +52,10 @@
                 }
                 return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
             }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Cet article n\'existe pas'
+                ));
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
@@ -62,6 +74,10 @@
                 }
                 return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
             }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Cet article n\'existe pas'
+                ));
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
@@ -80,6 +96,10 @@
                 }
                 return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
             }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Cet article n\'existe pas'
+                ));
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
