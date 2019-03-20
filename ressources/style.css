@@ -13,12 +13,33 @@ h1 {
 .red{
     color : red;
 }
+
+.black{
+    color:black;
+}
 .center {
     text-align : center;
 }
 
-.taille{
+.t200{
     height: 200px;
+}
+
+.t60{
+    height: 50px;
+}
+
+ .t40{
+    height: 35px;
+ }
+ 
+ .t80{
+    height: 70px;
+    overflow: hidden;
+ }
+
+.t20{
+    height: 20px;
 }
 /*
 *{

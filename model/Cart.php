@@ -79,6 +79,18 @@ class Cart{
         return $this;
     }
     
+    function set($idItem, $nb){
+        if(isset($this->numberTab[$idItem])){
+            $this->number -= $this->numberTab[$idItem];
+            if($nb == 0){
+                unset($this->numberTab[$idItem]);
+            }else{
+                $this->numberTab[$idItem] = $nb;
+                $this->number += $nb;
+            }
+        }
+    }
+    
     function remove($idItem){
         if(isset($this->numberTab[$idItem])){
             $this->number -= $this->numberTab[$idItem];

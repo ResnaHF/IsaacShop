@@ -8,14 +8,21 @@
             {% for item in randomList %}
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <a href="/item/{{item.getId}}"> 
-                        <div class="thumbnail taille">
+                        <div class="thumbnail t200">
+                            <div class="t60">
                                 <img src="{{item.getImg}}" class="img-responsive center-block"  height="48" width="48"/>
-                                <div class="caption">
+                            </div>
+                            <div class="black">
+                                <div class="t40">
                                     <h3 class="center">{{ item.getName }}</h3>
-                                    <p class="center">{{ item.getDescription }}</p>
-                                    <span class="pull-right">{{ item.getPrice }} <img src="/ressources/coin.png"/></span>
-                                    </p>
                                 </div>
+                                <div class="t80">
+                                    <p class="center">{{ item.getDescription }}</p>
+                                </div>
+                                <div class="t20">
+                                    <span class="pull-right">{{ item.getPrice }} <img src="/ressources/coin.png"/></span>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </div>

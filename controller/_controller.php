@@ -34,6 +34,7 @@
             $app->get('/item/plus/{id}', 'ItemCtrl::plus');
             $app->get('/item/minus/{id}', 'ItemCtrl::minus');
             $app->get('/item/remove/{id}', 'ItemCtrl::remove');
+            $app->get('/item/set/{id}', 'ItemCtrl::set');
             
             $app->get('/cart/', 'CartCtrl::GET');
             $app->get('/cart/plus/{id}', 'CartCtrl::plus');
