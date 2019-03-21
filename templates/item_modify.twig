@@ -1,0 +1,43 @@
+{% extends "_commun.twig" %} 
+
+{% block content %}
+    <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+    <div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
+        <h1 class="center">Modification d'un article</h2>
+
+        <form class="form-row"  method="post" action="/item/modify/{{item.getId}}" >
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">nom<span class="red">*</span></span>
+                        <input type="text" class="form-control" name="name" value="{{item.getName}}" maxlength=50 required/>
+                    </div>
+                </div>
+                    
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">prix<span class="red">*</span></span>
+                        <input type="text" class="form-control" name="price" value="{{item.getPrice}}" pattern="[0-9]*" maxlength=10 required/>
+                        <span class="input-group-addon"><img src="/ressources/coin.png"/></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <span class="input-group-addon">description<span class="red">*</span></span>
+                <input type="text" class="form-control" name="desc" value="{{item.getDescription}}" maxlength=100 required/>
+            </div>
+            
+            <div class="input-group">
+                <span class="input-group-addon">url image<span class="red">*</span></span>
+                <input type="text" class="form-control" name="img" value="{{item.img}}" maxlength=100 required/>
+            </div>
+            
+            <hr>
+        	<div class="center">
+        	    <button type="submit" class="btn btn-primary">Modifier l'article</button>
+        	</div>
+        </form>
+    </div>
+    
+{% endblock %}

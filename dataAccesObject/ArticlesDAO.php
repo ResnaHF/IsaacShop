@@ -47,5 +47,41 @@ class ArticlesDAO {
            
         return $qb->getQuery()->getResult()[0][1];
     }
+    
+    public static function create($createPost){
+        $item = new Articles;
+        $item->setName($createPost['name']);
+        $item->setPrice($createPost['price']);
+        $item->setDescription($createPost['desc']);
+        $item->setImg($createPost['img']);
+        
+        Bootstrap::$entityManager->persist($item);
+        Bootstrap::$entityManager->flush();
+        
+        return $item->getId();
+    }
+    
+    public static function update($idItem, $modifyPost){
+        $item = Bootstrap::$entityManager->getRepository('Articles')->findOneById($idItem);
+        if(isset($item)){
+            $item->setName($modifyPost['name']);
+            $item->setPrice($modifyPost['price']);
+            $item->setDescription($modifyPost['desc']);
+            $item->setImg($modifyPost['img']);
+            
+            Bootstrap::$entityManager->persist($item);
+            Bootstrap::$entityManager->flush();
+        }
+        
+    }
+    
+    public static function remove($idItem){
+        $item = Bootstrap::$entityManager->getRepository('Articles')->findOneById($idItem);
+        if(isset($item)){
+            Bootstrap::$entityManager->remove($item);
+            Bootstrap::$entityManager->flush();
+        }
+        
+    }
 }
 ?>

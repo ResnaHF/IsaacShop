@@ -103,5 +103,111 @@
                 return $response->withStatus(302)->withHeader('Location', '/');
             }
         }
+        
+        static function create_GET($request, $response, $args) { 
+            $params = Controller::defaultParams('item');
+            if($params['isAdmin']){
+                $template = Controller::$twig -> loadTemplate ('item_create.twig');
+                return $response->write( $template ->render ($params)); 
+            }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Vous n\'avez pas accès à cette page'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/search/');
+            }
+        }
+        
+        static function create_POST($request, $response, $args) { 
+            $params = Controller::defaultParams('item');
+            if($params['isAdmin']){
+                $idItem = ArticlesDAO::create($_POST);
+                $_SESSION['infos'] = array(array(
+                    'type' => 'SUCCES',
+                    'message' => 'Article créé'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/item/'.$idItem);
+            }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Vous n\'avez pas accès à cette page'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/search/');
+            }
+        }
+        
+        static function modify_GET($request, $response, $args) { 
+            $params = Controller::defaultParams('item');
+            if($params['isAdmin']){
+                $params['item'] = ArticlesDAO::getItem($args['id']);
+                if(isset($params['item'])){
+                    $template = Controller::$twig -> loadTemplate ('item_modify.twig');
+                    return $response->write( $template ->render ($params)); 
+                }else{
+                    $_SESSION['infos'] = array(array(
+                        'type' => 'INFO',
+                        'message' => 'Cet article n\'existe pas'
+                    ));
+                    return $response->withStatus(302)->withHeader('Location', '/');
+                }
+            }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Vous n\'avez pas accès à cette page'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
+            }
+        }
+        
+        static function modify_POST($request, $response, $args) { 
+            $params = Controller::defaultParams('item');
+            if($params['isAdmin']){
+                $params['item'] = ArticlesDAO::getItem($args['id']);
+                if(isset($params['item'])){
+                    ArticlesDAO::update($args['id'], $_POST);
+                    $_SESSION['infos'] = array(array(
+                        'type' => 'SUCCES',
+                        'message' => 'Vous avez modifié cet article'
+                    ));
+                    $template = Controller::$twig -> loadTemplate ('item_modify.twig');
+                    return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
+                }else{
+                    $_SESSION['infos'] = array(array(
+                        'type' => 'INFO',
+                        'message' => 'Cet article n\'existe pas'
+                    ));
+                    return $response->withStatus(302)->withHeader('Location', '/');
+                }
+            }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Vous n\'avez pas accès à cette page'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
+            }
+        }
+        
+        static function delete($request, $response, $args) { 
+            $params = Controller::defaultParams('item');
+            if($params['isAdmin']){
+                $params['item'] = ArticlesDAO::getItem($args['id']);
+                if(isset($params['item'])){
+                    ArticlesDAO::remove($args['id']);
+                    return $response->withStatus(302)->withHeader('Location', '/search/');
+                }else{
+                    $_SESSION['infos'] = array(array(
+                        'type' => 'INFO',
+                        'message' => 'Cet article n\'existe pas'
+                    ));
+                    return $response->withStatus(302)->withHeader('Location', '/');
+                }
+            }else{
+                $_SESSION['infos'] = array(array(
+                    'type' => 'INFO',
+                    'message' => 'Vous n\'avez pas accès à cette page'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
+            }
+        }
     }
 ?>

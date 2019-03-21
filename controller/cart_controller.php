@@ -4,8 +4,13 @@
             if (isset($_SESSION['cart'])){
                 $params = Controller::defaultParams('cart');
                 $param['cart'] = $_SESSION['cart'] -> compute();
-                $template = Controller::$twig -> loadTemplate ('cart.twig');    
-                return $response->write( $template -> render ($params)); 
+                if($param['cart']->getNumber() > 0){
+                    $template = Controller::$twig -> loadTemplate ('cart.twig');    
+                    return $response->write( $template -> render ($params)); 
+                }else{
+                    unset($_SESSION['cart']);
+                    return $response->withStatus(302)->withHeader('Location', '/');
+                }
             }else{
                 $_SESSION['infos'] = array(array(
                     'type' => 'INFO',

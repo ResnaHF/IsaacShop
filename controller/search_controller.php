@@ -41,6 +41,9 @@
             
             $params['count'] = $count = ArticlesDAO::countItem($name, $min, $max);
             $nbPages = ceil((int)$count/(int)$sizePage);
+            if($nbPages <= 0){
+                $nbPages = 1;
+            }
             
             if($page > $nbPages){
                 $params['page'] = $page = $nbPages;

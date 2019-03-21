@@ -49,6 +49,16 @@
                         {% endif %}
                     </div>
                 </div>
+                {% if isAdmin %}
+                    <hr>
+                    <div class="row text-right">
+                        <div class="btn-group" role="group" >
+                            
+                            <a type="button" class="btn btn-default" href="/item/modify/{{item.getId}}">Modifier</a>
+                            <a type="button" class="btn btn-default" href="#deleteModal" data-toggle="modal" >Supprimer</a>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
         </div>
@@ -57,4 +67,25 @@
         
        </div>
     <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+    
+    <!-- TIPS : https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-modals.php -->
+    <div id="deleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes vous sur de vouloir supprimer cet article ?</p>
+                    <p class="text-warning"><small>Pas de retour possible.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a type="button" class="btn btn-primary" href="/item/delete/{{item.getId}}">Supprimer l'article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}

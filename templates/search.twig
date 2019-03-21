@@ -31,28 +31,35 @@
             </div>
         </form>
         <div class="row">
-            <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 text-right">
-                <div class="btn-group" role="group" >
-                    {% if _first is defined %}
-                        <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_first}}">{{_first}}</a>
-                    {% endif %}
-                    {% if isSepBegin %}
-                        <span class="nobtn">...</span>
-                    {% endif %}
-                    {% if previus is defined %}
-                        <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{previus}}">{{previus}}</a>
-                    {% endif %}
-                    <a type="button" class="btn btn-default active" href="#">{{current}}</a>
-                    {% if next is defined %}
-                        <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{next}}">{{next}}</a>
-                    {% endif %}
-                    {% if isSepEnd %}
-                        <span class="nobtn">...</span>
-                    {% endif %}
-                    {% if _last is defined %}
-                        <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_last}}">{{_last}}</a>
-                    {% endif %}
+            {% if isAdmin %}
+                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 text-left">
+                    <a type="button" class="btn btn-default" href="/item/create/">Création</a>
                 </div>
+                <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 text-right">
+            {% else %}
+                <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 text-right">
+            {% endif %}
+                    <div class="btn-group" role="group" >
+                        {% if _first is defined %}
+                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_first}}">{{_first}}</a>
+                        {% endif %}
+                        {% if isSepBegin %}
+                            <span class="nobtn">...</span>
+                        {% endif %}
+                        {% if previus is defined %}
+                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{previus}}">{{previus}}</a>
+                        {% endif %}
+                        <a type="button" class="btn btn-default active" href="#">{{current}}</a>
+                        {% if next is defined %}
+                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{next}}">{{next}}</a>
+                        {% endif %}
+                        {% if isSepEnd %}
+                            <span class="nobtn">...</span>
+                        {% endif %}
+                        {% if _last is defined %}
+                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_last}}">{{_last}}</a>
+                        {% endif %}
+                    </div>
             </div>
             
             <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 text-right">
@@ -80,7 +87,7 @@
             <tbody>
                 {% for item in itemList %}
                     <tr>
-                        <td><img src="{{item.getImg}}"/></td>
+                        <td><img src="{{item.getImg}}" height="32" width="32"/></td>
                         <td><a href="/item/{{item.getId}}">{{item.getName}}</a></td>
                         <td>{{item.getPrice|number_format}} <img src="/ressources/coin.png"/></td>
                     </tr>

@@ -28,6 +28,12 @@
             $app->get('/item/remove/{id}', 'ItemCtrl::remove');
             $app->get('/item/set/{id}', 'ItemCtrl::set');
             
+            $app->get('/item/create/', 'ItemCtrl::create_GET');
+            $app->post('/item/create/', 'ItemCtrl::create_POST');
+            $app->get('/item/modify/{id}', 'ItemCtrl::modify_GET');
+            $app->post('/item/modify/{id}', 'ItemCtrl::modify_POST');
+            $app->get('/item/delete/{id}', 'ItemCtrl::delete');
+            
             $app->get('/cart/', 'CartCtrl::GET');
             $app->get('/cart/plus/{id}', 'CartCtrl::plus');
             $app->get('/cart/minus/{id}', 'CartCtrl::minus');

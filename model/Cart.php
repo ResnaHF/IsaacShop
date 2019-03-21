@@ -101,11 +101,21 @@ class Cart{
     
     function compute(){
         $this->amount = 0;
+        $this->amountTab = array();
+        $this->itemTab = array();
         $itemList = ArticlesDAO::getItemList(array_keys($this->numberTab));
-        foreach($itemList as $item){
-            if(isset($this->numberTab[$item->getId()])){
-                $this->amount += ($this->amountTab[$item->getId()] = $this->numberTab[$item->getId()] * $item->getPrice());
-                $this->itemTab[$item->getId()] = $item;
+        foreach($this->numberTab as $id=>$number){
+            $found = false;
+            foreach($itemList as $item){
+                if($item->getId() == $id){
+                    $found=true;
+                    $this->amount += ($this->amountTab[$id] = $number * $item->getPrice());
+                    $this->itemTab[$item->getId()] = $item;
+                }
+            }
+            if(!$found){
+                $this->number -= $this->numberTab[$id];
+                unset($this->numberTab[$id]);
             }
         }
         return $this;
