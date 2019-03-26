@@ -5,9 +5,21 @@
         static function run(){
             session_name('IsaacShop');
             session_start();
-            $app= new \Slim\App([
+            
+            $container = new \Slim\Container();
+            $container['notFoundHandler'] = function ($c) {
+                return function ($request, $response) use ($c) {
+                    $_SESSION['infos'] = array(array(
+                        'type' => 'INFO',
+                        'message' => 'Page introuvable'
+                    ));
+                    return $response->withStatus(302)->withHeader('Location', '/');
+                };  
+            };
+            $app = new \Slim\App($container, [
                 'settings' => ['displayErrorDetails' => true]
             ]);
+            
             Bootstrap::start();
             $loader = new Twig_Loader_Filesystem('templates');
             Controller::$twig = new Twig_Environment($loader, array( 'cache' => false ));
@@ -19,6 +31,7 @@
             $app->get('/profil/donnee/', 'ProfilCtrl::Donnee_GET');
             $app->post('/profil/donnee/', 'ProfilCtrl::Donnee_POST');
             $app->get('/profil/historique/', 'ProfilCtrl::Historique_GET');
+            $app->get('/profil/delete/{verifyCode}', 'ProfilCtrl::delete');
             
             $app->get('/search/', 'SearchCtrl::GET');
             
@@ -32,7 +45,7 @@
             $app->post('/item/create/', 'ItemCtrl::create_POST');
             $app->get('/item/modify/{id}', 'ItemCtrl::modify_GET');
             $app->post('/item/modify/{id}', 'ItemCtrl::modify_POST');
-            $app->get('/item/delete/{id}', 'ItemCtrl::delete');
+            $app->get('/item/delete/{id}/{verifyCode}', 'ItemCtrl::delete');
             
             $app->get('/cart/', 'CartCtrl::GET');
             $app->get('/cart/plus/{id}', 'CartCtrl::plus');
@@ -56,6 +69,7 @@
         static function defaultParams($pageName){
             $result = array();
             $result['page'] = $pageName;
+            unset($_SESSION['verifyCode']);
             
             if (isset($_SESSION['idUsers'])){
                 $result['isConnected'] = true;

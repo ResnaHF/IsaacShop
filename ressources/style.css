@@ -71,3 +71,12 @@ h1 {
     margin-left: -1px;
     margin-right: -1px;
 }
+
+.noul {
+    list-style:none;
+    margin-left:0;
+    padding-left:0;
+}
+.noli {
+    margin-bottom:15px;/* à adapter */
+ }

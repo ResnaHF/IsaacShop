@@ -24,9 +24,6 @@
 			{% if isCart %}	
 				<li {% if page == 'isCart' %}class="active"{% endif %}><a href="/cart/">Panier <span class="badge">{{cart.getNumber}}</span></a></li>
 			{% endif %}
-        	{% if isAdmin %}
-				<li {% if page == 'admin' %}class="active"{% endif %}><a href="/admin/">Administration</a></li>
-			{% endif %}
 			{% if isConnected %}	
 				<li {% if page == 'logout' %}class="active"{% endif %}><a href="/logout/">Déconnexion</a></li>
 			{% else %}	

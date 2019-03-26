@@ -7,6 +7,7 @@
                 $params = Controller::defaultParams('item');
                 $params['item'] = $item;
                 $params['nbInCart'] = isset($params['cart'])?$params['cart']->getNumberItem($item->getId()):0;
+                $params['verifyCode'] = $_SESSION['verifyCode'] = rand(1000000,999999999);
                 $template = Controller::$twig -> loadTemplate ('item.twig');
                 return $response->write( $template ->render ($params)); 
             }else{
@@ -187,13 +188,26 @@
             }
         }
         
-        static function delete($request, $response, $args) { 
+        static function delete($request, $response, $args) {
+            $verifyCode = $_SESSION['verifyCode'];
             $params = Controller::defaultParams('item');
             if($params['isAdmin']){
                 $params['item'] = ArticlesDAO::getItem($args['id']);
                 if(isset($params['item'])){
-                    ArticlesDAO::remove($args['id']);
-                    return $response->withStatus(302)->withHeader('Location', '/search/');
+                    if(isset($verifyCode) && $verifyCode == $args['verifyCode']){
+                        ArticlesDAO::remove($args['id']);
+                        $_SESSION['infos'] = array(array(
+                            'type' => 'SUCCES',
+                            'message' => 'article supprimé'
+                        ));
+                        return $response->withStatus(302)->withHeader('Location', '/search/');
+                    }else{
+                        $_SESSION['infos'] = array(array(
+                            'type' => 'ERROR',
+                            'message' => 'clé de validation invalide'
+                        ));
+                        return $response->withStatus(302)->withHeader('Location', '/item/'.$args['id']);
+                    }
                 }else{
                     $_SESSION['infos'] = array(array(
                         'type' => 'INFO',

@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-xs-2 col-sm-4 col-md-5 col-lg-5"></div>
-    <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2">
-        <ul>
+    <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4"></div>
+    <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
+        <ul class="noul text-center">
             {% for info in infos %}
-                <p>
+                <li class="noli">
                         {% if info['type'] == 'SUCCES' %}
                             <span class="label label-success">Succès</span>
                         {% elseif info['type'] == 'INFO' %}
@@ -16,5 +16,5 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="col-xs-2 col-sm-4 col-md-5 col-lg-5"></div>
+    <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4"></div>
 </div>

@@ -15,6 +15,7 @@
                 $params['city'] = $user->getCity();
                 $params['phone'] = $user->getPhone();
                 $params['news'] = $user->getNews();
+                $params['verifyCode'] = $_SESSION['verifyCode'] = rand(1000000,999999999);
                 
                 $template = Controller::$twig -> loadTemplate ('profil_donnee.twig');    
                 return $response->write( $template ->render ($params)); 
@@ -137,5 +138,19 @@
             $template = Controller::$twig -> loadTemplate ('profil_historique.twig');    
             return $response->write( $template ->render ($params)); 
         }
+        
+        static function delete($request, $response, $args) {
+            if(isset($_SESSION['verifyCode']) && $_SESSION['idUsers'] && $_SESSION['verifyCode'] == $args['verifyCode']){
+                //UsersDAO::delete($_SESSION['idUsers']);
+                unset($_SESSION['idUsers']);            
+                $_SESSION['infos'] = array(array(
+                    'type' => 'SUCCES',
+                    'message' => 'Votre compte à été supprimer, à bientôt'
+                ));
+                return $response->withStatus(302)->withHeader('Location', '/');
+            }else{
+                return $response->withStatus(302)->withHeader('Location', '/profil/');
+            }
+        }     
     }
 ?>
