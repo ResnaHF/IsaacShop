@@ -5,7 +5,7 @@
     <div class="col-xs-10 col-sm-8 col-md-6 col-lg-6">
         <h1 class="center">Recherche d'un article</h1>
         
-        <form class="form-row"  method="get" action="/search/" >
+        <form class="form-row"  method="get" action="/search/" name="form">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-5">
                     <div class="input-group">
@@ -25,6 +25,12 @@
                 <div class="col-lg-1 col-md-1 col-sm-1 text-right">
                 	    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </div>
+                {% if isOrderBy %}
+                    <input name="orderBy" value="{{orderBy}}" type="hidden"/>
+                {% endif %}
+                {% if isSens %}
+                    <input name="sens" value="{{sens}}" type="hidden"/>
+                {% endif %}
                 {% if isSizePage %}
                     <input name="sizePage" value="{{sizePage}}" type="hidden"/>
                 {% endif %}
@@ -39,27 +45,29 @@
             {% else %}
                 <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 text-right">
             {% endif %}
-                    <div class="btn-group" role="group" >
-                        {% if _first is defined %}
-                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_first}}">{{_first}}</a>
-                        {% endif %}
-                        {% if isSepBegin %}
-                            <span class="nobtn">...</span>
-                        {% endif %}
-                        {% if previus is defined %}
-                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{previus}}">{{previus}}</a>
-                        {% endif %}
-                        <a type="button" class="btn btn-default active" href="#">{{current}}</a>
-                        {% if next is defined %}
-                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{next}}">{{next}}</a>
-                        {% endif %}
-                        {% if isSepEnd %}
-                            <span class="nobtn">...</span>
-                        {% endif %}
-                        {% if _last is defined %}
-                            <a type="button" class="btn btn-default" href="/search/?{{getUrl}}&sizePage={{sizePage}}&page={{_last}}">{{_last}}</a>
-                        {% endif %}
-                    </div>
+                    {% if count > 0 %}
+                        <div class="btn-group" role="group" >
+                            {% if _first is defined %}
+                                <a type="button" class="btn btn-default" href="/search/?{{getUrlPage}}&page={{_first}}">{{_first}}</a>
+                            {% endif %}
+                            {% if isSepBegin %}
+                                <span class="nobtn">...</span>
+                            {% endif %}
+                            {% if previus is defined %}
+                                <a type="button" class="btn btn-default" href="/search/?{{getUrlPage}}&page={{previus}}">{{previus}}</a>
+                            {% endif %}
+                            <a type="button" class="btn btn-default active" href="#">{{current}}</a>
+                            {% if next is defined %}
+                                <a type="button" class="btn btn-default" href="/search/?{{getUrlPage}}&page={{next}}">{{next}}</a>
+                            {% endif %}
+                            {% if isSepEnd %}
+                                <span class="nobtn">...</span>
+                            {% endif %}
+                            {% if _last is defined %}
+                                <a type="button" class="btn btn-default" href="/search/?{{getUrlPage}}&page={{_last}}">{{_last}}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
             </div>
             
             <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 text-right">
@@ -68,40 +76,44 @@
                         {{sizePage}} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="/search/?{{getUrl}}&sizePage=20">20</a></li>
-                        <li><a href="/search/?{{getUrl}}&sizePage=50">50</a></li>
-                        <li><a href="/search/?{{getUrl}}&sizePage=100">100</a></li>
+                        <li><a href="/search/?{{getUrlSizePage}}&sizePage=20">20</a></li>
+                        <li><a href="/search/?{{getUrlSizePage}}&sizePage=50">50</a></li>
+                        <li><a href="/search/?{{getUrlSizePage}}&sizePage=100">100</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>nom</th>
-                    <th>prix</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in itemList %}
+        {% if count > 0 %}
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><img src="{{item.getImg}}" height="32" width="32"/></td>
-                        <td><a href="/item/{{item.getId}}">{{item.getName}}</a></td>
-                        <td>{{item.getPrice|number_format}} <img src="/ressources/coin.png"/></td>
+                        <th></th>
+                        <th><a href="/search/?{{getUrlOrderByName}}">nom{% if orderBy == 'name' %}<span class="glyphicon glyphicon-triangle-{% if sens == 'ASC' %}top{% else %}bottom{% endif %}"></span>{% endif %}</a></th>
+                        <th><a href="/search/?{{getUrlOrderByPrice}}">prix{% if orderBy == 'price' %}<span class="glyphicon glyphicon-triangle-{% if sens == 'ASC' %}top{% else %}bottom{% endif %}"></span>{% endif %}</a></th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
-                <a href="#"><span class="glyphicon glyphicon-triangle-top"></span></a>
+                </thead>
+                <tbody>
+                    {% for item in itemList %}
+                        <tr>
+                            <td><img src="{{item.getImg}}" height="32" width="32"/></td>
+                            <td><a href="/item/{{item.getId}}">{{item.getName}}</a></td>
+                            <td>{{item.getPrice|number_format}} <img src="/ressources/coin.png"/></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
+                    <a href="#"><span class="glyphicon glyphicon-triangle-top"></span></a>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <a href="#"><span class="glyphicon glyphicon-triangle-top"></span></a>
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                <a href="#"><span class="glyphicon glyphicon-triangle-top"></span></a>
-            </div>
-        </div>
+        {% else %}
+            <h3 class="center">Aucun résultat</h3>
+        {% endif %}
     </div>
-    <div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
+    <div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div
 {% endblock %}

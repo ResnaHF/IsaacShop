@@ -15,7 +15,7 @@ class ArticlesDAO {
         return Bootstrap::$entityManager->getRepository('Articles')->findById($idItemList);
     }
     
-    public static function search($name, $min, $max, $page, $sizePage){
+    public static function search($name, $min, $max, $orderBy, $sens, $page, $sizePage){
         //TIPS : https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/query-builder.html#working-with-querybuilder
         $qb = Bootstrap::$entityManager->createQueryBuilder();
         $qb->select('i')
@@ -23,6 +23,7 @@ class ArticlesDAO {
            ->where('i.name LIKE :name')
            ->andwhere('i.price >= :min')
            ->andwhere('i.price <= :max')
+           ->orderBy('i.'.$orderBy, $sens)
            
            ->setParameter('name', '%'.$name.'%')
            ->setParameter('min', $min)
